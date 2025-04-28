@@ -15,7 +15,7 @@
         android:layout_marginTop="48dp"
         app:cardCornerRadius="16dp"
         app:cardBackgroundColor="@color/purple"
-        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintHeight_percent="0.15"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -24,7 +24,7 @@
             android:id="@+id/textTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Total"
+            android:text="Total: 32 Receitas"
             android:textSize="34sp"
             android:textColor="@android:color/white"
             android:layout_gravity="start|center_vertical"
