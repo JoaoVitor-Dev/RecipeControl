@@ -11,6 +11,5 @@ class RecipesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_recipes)
-
     }
 }

@@ -8,4 +8,6 @@ class RecipeRepository(private val recipeDao: RecipeDao) {
     fun getAllSales(): Flow<List<Recipe>> = recipeDao.getAllSales()
 
     suspend fun deleteSaleById(id: Long) = recipeDao.deleteSaleById(id)
+
+    fun insertRecipe(recipe: Recipe) = recipeDao.insertRecipe(recipe)
 }
