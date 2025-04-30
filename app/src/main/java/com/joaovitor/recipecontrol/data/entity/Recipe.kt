@@ -2,9 +2,20 @@ package com.joaovitor.recipecontrol.data.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "recipes")
+@Entity(
+    tableName = "recipes",
+    foreignKeys = [
+        ForeignKey(
+            entity = Goal::class,
+            parentColumns = ["id"],
+            childColumns = ["goal_id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class Recipe(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
@@ -28,5 +39,8 @@ data class Recipe(
     val minute: Int,
 
     @ColumnInfo(name = "timestamp")
-    val timestamp: Long = System.currentTimeMillis()
+    val timestamp: Long = System.currentTimeMillis(),
+
+    @ColumnInfo(name = "goal_id")
+    val goalId: Long
 )

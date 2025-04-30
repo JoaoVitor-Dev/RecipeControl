@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    // Não é necessário adicionar o plugin kapt/ksp explicitamente neste momento
+    kotlin("kapt")
 }
 
 android {
@@ -48,8 +48,9 @@ dependencies {
     // Adicione o Room diretamente, sem usar version catalogs temporariamente
     val roomVersion = "2.6.1"
     implementation("androidx.room:room-runtime:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
     annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
