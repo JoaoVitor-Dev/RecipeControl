@@ -13,7 +13,7 @@
         android:layout_height="0dp"
         android:layout_margin="16dp"
         android:layout_marginTop="44dp"
-        app:cardBackgroundColor="@color/purple"
+        android:backgroundTint="@color/purple"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.15"
