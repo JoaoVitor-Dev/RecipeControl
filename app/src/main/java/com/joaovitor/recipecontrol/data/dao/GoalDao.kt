@@ -11,4 +11,7 @@ import kotlinx.coroutines.flow.Flow
 interface GoalDao {
     @Insert
     fun insertGoal(goal: Goal)
+
+    @Query("SELECT * FROM goals WHERE month = :month")
+    fun getGoalByMonth(month: Int): Goal?
 }
