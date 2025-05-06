@@ -17,8 +17,8 @@ class GoalActivity : AppCompatActivity() {
     }
 
     private fun setup(){
-        var textViewMonth: TextView = findViewById(R.id.textViewMonth)
+        //var textViewMonth: TextView = findViewById(R.id.textViewMonth)
 
-        textViewMonth.setText(Month.getCurrentMonthName())
-    }
+        //textViewMonth.setText(Month.getCurrentMonthName())
+    }///
 }
