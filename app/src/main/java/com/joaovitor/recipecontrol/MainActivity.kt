@@ -11,7 +11,7 @@ import androidx.cardview.widget.CardView
 import com.joaovitor.recipecontrol.data.dao.GoalDao
 import com.joaovitor.recipecontrol.data.database.AppDatabase
 import com.joaovitor.recipecontrol.data.entity.Goal
-import com.joaovitor.recipecontrol.data.repository.GoalRepository
+import com.joaovitor.recipecontrol.utils.Month
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,6 +20,8 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
 
     private lateinit var goalDao: GoalDao
+    private lateinit var cardView: CardView
+    private lateinit var btnNew: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +29,9 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val btnNova: Button = findViewById(R.id.buttonNovaReceita)
+        setup()
 
-        btnNova.setOnClickListener {
+        btnNew.setOnClickListener {
             CoroutineScope(Dispatchers.IO).launch {
                 cadastrar()
 
@@ -39,21 +41,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val cardTotais: CardView = findViewById(R.id.cardTotais)
-        cardTotais.setOnClickListener {
+        cardView.setOnClickListener {
             val intent = Intent(this, RecipesActivity::class.java)
             startActivity(intent)
         }
+
+    }
+
+    private fun setup(){
+        cardView = findViewById<CardView>(R.id.cardTotais)
+        btnNew = findViewById<Button>(R.id.buttonNovaReceita)
+
+        goalDao = AppDatabase.getDatabase(this).goalDao()
+
+        val goal = goalDao.getGoalByMonth(Month.getCurrentMonth())
+
+
     }
 
     private fun cadastrar(){
 
-        val goal = Goal(
-            value = 100, // Valor do goal
-            month = 4     // Mês (exemplo: abril)
-        )
-        goalDao = AppDatabase.getDatabase(this).goalDao()
-
-        goalDao.insertGoal(goal)
     }
 }

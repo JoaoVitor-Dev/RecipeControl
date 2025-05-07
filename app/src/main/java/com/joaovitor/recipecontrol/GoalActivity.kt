@@ -65,12 +65,12 @@ class GoalActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Nova meta cadastrada com sucesso", Toast.LENGTH_SHORT).show()
             }
         }
-
         navigateToMain()
     }
 
     private fun saveGoal(){
         val goal = Goal(
+            name = edtName.text.trim().toString(),
             value = Integer.parseInt(edtGoal.text.trim().toString()),
             month = Month.getCurrentMonth()
         )

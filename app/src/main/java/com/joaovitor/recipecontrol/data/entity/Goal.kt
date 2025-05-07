@@ -9,6 +9,9 @@ data class Goal(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
 
+    @ColumnInfo(name = "name")
+    val name: String,
+
     @ColumnInfo(name = "value")
     val value: Int,
 
