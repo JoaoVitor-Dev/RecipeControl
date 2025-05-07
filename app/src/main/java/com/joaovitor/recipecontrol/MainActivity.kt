@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.joaovitor.recipecontrol.data.dao.GoalDao
 import com.joaovitor.recipecontrol.data.database.AppDatabase
@@ -22,12 +24,21 @@ class MainActivity : AppCompatActivity() {
     private lateinit var goalDao: GoalDao
     private lateinit var cardView: CardView
     private lateinit var btnNew: Button
+    private lateinit var textGoal: TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
+
+        val toolbar: Toolbar = findViewById(R.id.customToolbar)
+        setSupportActionBar(toolbar)
+
+        // Opcional: esconder o título padrão da ActionBar
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        supportActionBar?.title = "RecipeControl"
 
         setup()
 
@@ -51,12 +62,17 @@ class MainActivity : AppCompatActivity() {
     private fun setup(){
         cardView = findViewById<CardView>(R.id.cardTotais)
         btnNew = findViewById<Button>(R.id.buttonNovaReceita)
+        textGoal = findViewById<TextView>(R.id.textGoal)
 
-        goalDao = AppDatabase.getDatabase(this).goalDao()
+        CoroutineScope(Dispatchers.IO).launch {
+            goalDao = AppDatabase.getDatabase(applicationContext).goalDao()
 
-        val goal = goalDao.getGoalByMonth(Month.getCurrentMonth())
+            var goal = goalDao.getGoalByMonth(Month.getCurrentMonth())
 
-
+            withContext(Dispatchers.Main) {
+                textGoal.text =  "Meta: "+goal?.value
+            }
+        }
     }
 
     private fun cadastrar(){
