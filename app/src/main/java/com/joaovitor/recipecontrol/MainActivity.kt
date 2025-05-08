@@ -3,6 +3,8 @@ package com.joaovitor.recipecontrol
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -32,13 +34,10 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val toolbar: Toolbar = findViewById(R.id.customToolbar)
+        val toolbar: Toolbar = findViewById<Toolbar>(R.id.customToolbar)
         setSupportActionBar(toolbar)
 
-        // Opcional: esconder o título padrão da ActionBar
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-
-        supportActionBar?.title = "RecipeControl"
+        //supportActionBar?.title = "RecipeControl"
 
         setup()
 
@@ -59,6 +58,25 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.bottom_navigation_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.nav_home -> {
+                Toast.makeText(this, "Configurações selecionadas", Toast.LENGTH_SHORT).show()
+                true
+            }
+            R.id.nav_search -> {
+                Toast.makeText(this, "Sobre selecionado", Toast.LENGTH_SHORT).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun setup(){
         cardView = findViewById<CardView>(R.id.cardTotais)
         btnNew = findViewById<Button>(R.id.buttonNovaReceita)
@@ -71,6 +89,7 @@ class MainActivity : AppCompatActivity() {
 
             withContext(Dispatchers.Main) {
                 textGoal.text =  "Meta: "+goal?.value
+                supportActionBar?.title = "Olá "+goal?.name
             }
         }
     }
