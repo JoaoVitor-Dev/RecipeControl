@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.cardview.widget.CardView
 import com.joaovitor.recipecontrol.data.dao.GoalDao
@@ -37,7 +39,27 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById<Toolbar>(R.id.customToolbar)
         setSupportActionBar(toolbar)
 
-        //supportActionBar?.title = "RecipeControl"
+        val customMenuButton = findViewById<ImageButton>(R.id.customMenuButton)
+        customMenuButton.setOnClickListener {
+            // Cria e exibe o PopupMenu
+            val popupMenu = PopupMenu(this, customMenuButton)
+            popupMenu.menuInflater.inflate(R.menu.bottom_navigation_menu, popupMenu.menu) // Substitua pelo seu menu
+            popupMenu.setOnMenuItemClickListener { menuItem ->
+                // Lidar com cliques nos itens do menu
+                when (menuItem.itemId) {
+                    R.id.nav_home -> {
+                        // Ação para item 1
+                        true
+                    }
+                    R.id.nav_search -> {
+                        // Ação para item 2
+                        true
+                    }
+                    else -> false
+                }
+            }
+            popupMenu.show()
+        }
 
         setup()
 
@@ -59,22 +81,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.bottom_navigation_menu, menu)
         return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.nav_home -> {
-                Toast.makeText(this, "Configurações selecionadas", Toast.LENGTH_SHORT).show()
-                true
-            }
-            R.id.nav_search -> {
-                Toast.makeText(this, "Sobre selecionado", Toast.LENGTH_SHORT).show()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     private fun setup(){

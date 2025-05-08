@@ -5,26 +5,39 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/gray"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/customToolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/purple"
-        app:titleTextColor="@color/white"
-        android:elevation="4dp"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:titleTextColor="@color/purple"
+        android:elevation="18dp"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageButton
+            android:layout_margin="15dp"
+            android:id="@+id/customMenuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/menu_efff"
+        android:contentDescription="Menu" />
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardTotais"
         android:layout_width="match_parent"
         android:layout_height="110dp"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/purple"
+        android:backgroundTint="@color/white"
         app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,8 +54,8 @@
                 android:id="@+id/textTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Total de Receitas: "
-                android:textColor="@android:color/white"
+                android:text="Receitas de Maio: "
+                android:textColor="@color/purple"
                 android:textSize="25sp" />
 
             <TextView
@@ -50,8 +63,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Meta: 100"
-                android:textColor="@android:color/white"
-                android:textSize="15sp" />
+                android:textColor="@color/orange"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -72,12 +85,14 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonNovaReceita"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/purple"
+        android:textColor="@color/gray"
         android:text="Nova Receita"
+        android:elevation="8dp"
         app:cornerRadius="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
