@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cardView: CardView
     private lateinit var btnNew: Button
     private lateinit var textGoal: TextView
+    private lateinit var textTotal: TextView
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,18 +42,14 @@ class MainActivity : AppCompatActivity() {
 
         val customMenuButton = findViewById<ImageButton>(R.id.customMenuButton)
         customMenuButton.setOnClickListener {
-            // Cria e exibe o PopupMenu
             val popupMenu = PopupMenu(this, customMenuButton)
-            popupMenu.menuInflater.inflate(R.menu.bottom_navigation_menu, popupMenu.menu) // Substitua pelo seu menu
+            popupMenu.menuInflater.inflate(R.menu.bottom_navigation_menu, popupMenu.menu)
             popupMenu.setOnMenuItemClickListener { menuItem ->
-                // Lidar com cliques nos itens do menu
                 when (menuItem.itemId) {
                     R.id.nav_home -> {
-                        // Ação para item 1
                         true
                     }
                     R.id.nav_search -> {
-                        // Ação para item 2
                         true
                     }
                     else -> false
@@ -88,6 +85,7 @@ class MainActivity : AppCompatActivity() {
         cardView = findViewById<CardView>(R.id.cardTotais)
         btnNew = findViewById<Button>(R.id.buttonNovaReceita)
         textGoal = findViewById<TextView>(R.id.textGoal)
+        textTotal = findViewById<TextView>(R.id.textTotal)
 
         CoroutineScope(Dispatchers.IO).launch {
             goalDao = AppDatabase.getDatabase(applicationContext).goalDao()

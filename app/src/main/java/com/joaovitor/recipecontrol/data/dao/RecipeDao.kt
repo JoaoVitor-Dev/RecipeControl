@@ -15,5 +15,8 @@ interface RecipeDao {
     suspend fun deleteSaleById(saleId: Long)
 
     @Insert
-     fun insertRecipe(recipe: Recipe)
+    fun insertRecipe(recipe: Recipe)
+
+    @Query("SELECT COUNT(*) FROM recipes WHERE goal_id = :goalId")
+    fun countRecipesByGoalId(goalId: Long): Int
 }

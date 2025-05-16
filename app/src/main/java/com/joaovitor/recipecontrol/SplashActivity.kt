@@ -3,16 +3,11 @@ package com.joaovitor.recipecontrol
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import android.os.Looper
-import android.widget.TextView
 import androidx.core.view.WindowCompat
 import com.joaovitor.recipecontrol.data.dao.GoalDao
 import com.joaovitor.recipecontrol.data.database.AppDatabase
-import com.joaovitor.recipecontrol.utils.Month
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
