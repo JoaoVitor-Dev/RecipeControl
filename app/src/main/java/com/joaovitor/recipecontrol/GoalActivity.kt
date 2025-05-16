@@ -6,14 +6,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import com.joaovitor.recipecontrol.data.dao.GoalDao
 import com.joaovitor.recipecontrol.data.database.AppDatabase
 import com.joaovitor.recipecontrol.data.entity.Goal
-import com.joaovitor.recipecontrol.utils.Month
+import com.joaovitor.recipecontrol.utils.DateUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -72,7 +69,7 @@ class GoalActivity : AppCompatActivity() {
         val goal = Goal(
             name = edtName.text.trim().toString(),
             value = Integer.parseInt(edtGoal.text.trim().toString()),
-            month = Month.getCurrentMonth()
+            month = DateUtils.getCurrentMonth()
         )
         goalDao.insertGoal(goal)
     }

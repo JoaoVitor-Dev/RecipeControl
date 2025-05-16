@@ -54,7 +54,7 @@
                 android:id="@+id/textTotal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Receitas de Maio: "
+                android:text="@string/receitas_de_maio"
                 android:textColor="@color/purple"
                 android:textSize="25sp" />
 
