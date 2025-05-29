@@ -24,7 +24,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
@@ -66,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         setup()
 
         btnNew.setOnClickListener {
-            register()
+            saveNewRecipe()
         }
 
         cardView.setOnClickListener {
@@ -101,7 +100,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun register(){
+    private fun saveNewRecipe(){
         val builder = AlertDialog.Builder(this)
 
         builder.setTitle("Atenção")
@@ -113,6 +112,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         builder.setNegativeButton("Não") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun goalAchieved() {
+        val builder = AlertDialog.Builder(this)
+
+        builder.setTitle("Parabéns!")
+        builder.setMessage("Você atingiu a meta do mês")
+
+        builder.setPositiveButton("OK") { dialog, _ ->
             dialog.dismiss()
         }
 
@@ -139,9 +152,16 @@ class MainActivity : AppCompatActivity() {
 
             var recipesCount = recipeDao.countRecipesByGoalId(goal?.id ?: 0)
 
-            withContext(Dispatchers.Main) {
-                Toast.makeText(applicationContext, "Parabéns pela nova Venda!", Toast.LENGTH_SHORT).show()
-                textTotal.text = getString(R.string.receitas_de_maio)+" "+recipesCount
+            if (recipesCount == goal.value){
+                withContext(Dispatchers.Main){
+                    textTotal.text = getString(R.string.receitas_de_maio)+" "+recipesCount
+                    goalAchieved()
+                }
+            }else {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(applicationContext, "Nova receita lançada. Parabéns!", Toast.LENGTH_SHORT).show()
+                    textTotal.text = getString(R.string.receitas_de_maio)+" "+recipesCount
+                }
             }
         }
     }
