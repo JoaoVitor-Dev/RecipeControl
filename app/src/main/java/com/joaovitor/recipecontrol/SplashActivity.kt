@@ -15,6 +15,7 @@ import kotlinx.coroutines.withContext
 import java.time.LocalDate
 
 class SplashActivity : AppCompatActivity() {
+
     private lateinit var goalDao: GoalDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
